@@ -13,6 +13,7 @@ const Header: React.FC = () => {
   const links = [
     { href: routes.index, text: 'Home' },
     { href: routes.about, text: 'About' },
+    { href: routes.planets, text: 'Planets', query: { page: '1' } },
   ]
 
   return (
@@ -20,9 +21,16 @@ const Header: React.FC = () => {
       <Container>
         <nav>
           <S.Ul>
-            {links.map((link) => (
-              <S.Li active={router.pathname === link.href} key={link.href}>
-                <Link href={link.href}>{link.text}</Link>
+            {links.map((link, index) => (
+              <S.Li active={router.pathname === link.href} key={index}>
+                <Link
+                  href={{
+                    pathname: link.href,
+                    query: link.query,
+                  }}
+                >
+                  {link.text}
+                </Link>
               </S.Li>
             ))}
           </S.Ul>
